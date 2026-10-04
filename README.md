@@ -1,0 +1,64 @@
+# Reported Lassa fever case fatality in Nigeria, 2017-2026
+
+Pre-specified analysis plan and analysis code for a study of what published surveillance data can and cannot show about a change in reported Lassa fever case fatality in Nigeria.
+
+## The question
+
+The Nigeria Centre for Disease Control and Prevention (NCDC) reports a case fatality rate (CFR) among laboratory-confirmed Lassa fever cases in every weekly situation report. In 2026 the cumulative CFR at week 23 was 25.0%, against 18.9% in the same period of 2025. A reported CFR is a ratio of two counts produced by surveillance, so it can change for reasons other than a change in the risk of death: who is tested, which deaths are found, where cases occur and when the figure is read. This study sets out those mechanisms, assesses which of them the published reports allow us to evaluate, and evaluates those that can be.
+
+## The analysis plan
+
+`plan/analysis_plan.md` was fixed before the analyses were run on the final dataset. This repository's first commit, tagged `v1.0`, is that version. Any later change is reported, with its reason, in the paper and in a dated addendum to the plan. The plan opens with a summary in plain language.
+
+The plan fixes eight analyses in three roles:
+
+| Role | Analyses |
+|---|---|
+| Primary: the conclusions rest on these | A1 phase-matched comparison, A2 decomposition, A3 tipping point |
+| Secondary: reported in full, no conclusion rests on them alone | A4 hierarchical model, A5 isolated detection |
+| Descriptive | A6 suspected-case positivity, A7 use of the probable category, A8 year-end check |
+
+## Contents
+
+- `plan/analysis_plan.md`: the pre-specified analysis plan.
+- `R/`: the analysis, run in numbered order. `00_functions.R` holds shared helpers.
+- `sim/`: design simulations that informed choices in the plan. They use the structure of the data with simulated deaths.
+- `renv.lock`: package versions.
+
+## Data
+
+The data are counts of suspected, confirmed and probable cases and of deaths among confirmed cases, by state and epidemiological week, read by hand from NCDC Lassa fever situation reports (https://ncdc.gov.ng). The reports are public. The extracted dataset will be released with the paper.
+
+## Running the analysis
+
+Requires R 4.6 and a C++ toolchain for CmdStan (Rtools on Windows).
+
+```r
+renv::restore()
+cmdstanr::install_cmdstan(version = "2.40.0")
+```
+
+The scripts read the extraction ledger from `data-raw/lassa_state_week_ledger.csv`, one row per state, variable and report, with columns `year`, `epi_week`, `epi_week_span`, `state`, `region_id`, `variable`, `value`, `extraction`, `source_file` and `note`. Run the scripts in `R/` in order. They default to a small test size; set the environment variable `LASSA_SMOKE=FALSE` for the full analysis. The model fits take about an hour on a desktop machine.
+
+Outputs are written to:
+
+| Folder | Contents |
+|---|---|
+| `data/intermediate/` | Analysis-ready data built from the ledger |
+| `data/qc/` | Validation flags and the decomposition strata |
+| `data/results/` | One file per result, read by the figures and the manuscript |
+| `data/models/` | Fitted models |
+| `figures/` | Main and supplementary figures |
+| `tables/` | Supplementary tables |
+
+## Licence
+
+CC0 1.0 Universal: the code, the analysis plan and, when released, the extracted dataset are dedicated to the public domain. See `LICENSE`.
+
+## Use of AI tools
+
+AI tools (Claude Opus 5.5, Anthropic) were used to develop, test and comment the analysis code, and to review the text of the analysis plan and this repository. I accept full responsibility for their use and for the results produced under the plan.
+
+## Author
+
+David Simons, Uppsala University.
