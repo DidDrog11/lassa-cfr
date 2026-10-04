@@ -1,5 +1,7 @@
 # Reported Lassa fever case fatality in Nigeria, 2017-2026
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23135367.svg)](https://doi.org/10.5281/zenodo.23135367)
+
 Pre-specified analysis plan and analysis code for a study of what published surveillance data can and cannot show about a change in reported Lassa fever case fatality in Nigeria.
 
 ## The question
@@ -8,7 +10,7 @@ The Nigeria Centre for Disease Control and Prevention (NCDC) reports a case fata
 
 ## The analysis plan
 
-`plan/analysis_plan.md` was fixed before the analyses were run on the final dataset. This repository's first commit, tagged `v1.0`, is that version. Any later change is reported, with its reason, in the paper and in a dated addendum to the plan. The plan opens with a summary in plain language.
+`plan/analysis_plan.md` was fixed on 4 October 2026, before the analyses were run on the final dataset. This repository's first commit, tagged `v1.0`, is that version, archived at Zenodo: https://doi.org/10.5281/zenodo.23135368. Any later change is reported, with its reason, in the paper and in a dated addendum to the plan. The plan opens with a summary in plain language.
 
 The plan fixes eight analyses in three roles:
 
