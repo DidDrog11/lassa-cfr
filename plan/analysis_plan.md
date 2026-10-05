@@ -28,7 +28,7 @@ Version 1.0, fixed 4 October 2026. This version is the initial commit of the pub
 
 This is an analysis plan fixed before the analyses were run on the final dataset. It is not a preregistration. Any change made after this version is reported as a deviation, with its reason, in the paper and in a dated addendum to this document.
 
-Addenda: Addendum 1 (5 October 2026) adds one descriptive analysis, A9. It is at the end of this document.
+Addenda, at the end of this document: Addendum 1 (5 October 2026) adds one descriptive analysis, A9; Addendum 2 (5 October 2026) adds a check of rebuilt and missing weeks against a second NCDC publication.
 
 ## Prior knowledge
 
@@ -260,6 +260,16 @@ A9 is descriptive: differences are reported as counts, by year, state and week, 
 A9 does not change any other analysis. A1-A8 use the weekly figures, as specified; their interpretation states that the weekly figures exclude any deaths added only to the cumulative figures, and how many deaths that is in each year. The tipping point (A3) uses the published cumulative figures, as specified, and so includes them.
 
 Data and code: the cumulative figures are in `data-raw/lassa_cumulative_national.csv` and `data-raw/lassa_cumulative_state.csv`, and A9 runs in `R/addendum1_cumulative_gap.R`.
+
+## Addendum 2, 5 October 2026
+
+This addendum adds one check. It changes no analysis, and no analysis uses its values.
+
+**Why it was added.** NCDC's general Weekly Epidemiological Report, which covers all priority diseases, also gives national Lassa fever counts each week, drawn from the same surveillance data, and survives for some weeks whose situation report does not. It came to light after the plan was fixed, through an independently extracted dataset of these national counts (Niyi-Oriolowo, NCDC Lassa fever weekly timeseries dataset, Hugging Face, 2025, doi:10.57967/hf/7145) that fills the weeks missing from the situation-report archive from that report.
+
+**The check.** National confirmed cases and deaths from that dataset are compared with our data for the weeks rebuilt from the difference between two cumulative reports (data-handling rule 4: 2022 week 14, 2022 weeks 19-23 as one total, 2023 week 38 and 2024 week 16), and are listed for the weeks with no situation report. The situation reports remain the only data source for the analyses, and weeks with no situation report stay missing (data-handling rule 3). The comparison is reported as counts in the supplement.
+
+Code: `R/addendum2_wer_check.R`, which reads the dataset at a fixed revision.
 
 ## References
 
