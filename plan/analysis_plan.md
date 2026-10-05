@@ -28,6 +28,8 @@ Version 1.0, fixed 4 October 2026. This version is the initial commit of the pub
 
 This is an analysis plan fixed before the analyses were run on the final dataset. It is not a preregistration. Any change made after this version is reported as a deviation, with its reason, in the paper and in a dated addendum to this document.
 
+Addenda: Addendum 1 (5 October 2026) adds one descriptive analysis, A9. It is at the end of this document.
+
 ## Prior knowledge
 
 I extracted the data and was aware of its structure. The design of the current study was informed by an exploratory analysis of an earlier automated extraction of 2020-2026 reports; its estimates are not reported, but the extracted data are available (https://github.com/BioDivHealth/LF_Nigeria_Reports). Analysis code was developed and tested on a preliminary version of the dataset. I did not review these results before fixing this plan.
@@ -238,6 +240,26 @@ The analysis runs from the scripts in `R/`, in numbered order, on the extraction
 | `10_phase.R` | Phase-matched comparison |
 | `11_year_end.R` | Year-end check |
 | `12_figures.R` | Figures |
+
+## Addendum 1, 5 October 2026
+
+This addendum adds one descriptive analysis, A9. Nothing in version 1.0 above is changed: analyses A1-A8, their estimands, their roles and the data-handling rules stand as written.
+
+**Why it was added.** The first outputs on the final data showed that the cumulative deaths printed in the 2026 week 36 report were substantially higher than the sum of the deaths in that year's weekly reports, while cumulative confirmed cases closely matched. The year-end check (A8) compares the two only at the end of each year, and cannot show where or when such a difference arises. A9 was added after outputs on the final data had been seen, in response to them, and is reported as an analysis added after the plan was fixed.
+
+**A9. Printed cumulative figures against summed weekly figures (M10, M11).**
+
+*In plain terms.* Each report gives the figures for its week and a running total for the year. If deaths are added to the running total without ever appearing in a week's figures, a CFR calculated from the running total and one calculated from the weekly figures will differ. A9 measures that difference in every year, finds the states where it arises, and finds the weeks in which it is added. It does not say why the deaths were added: deaths recorded late among cases confirmed earlier, and revisions to the records, would look the same in these figures.
+
+1. The cumulative confirmed cases and deaths printed in the summary table on page one were read by hand from every report. From the final report of each year from 2020, the first year with a state table (for 2026, the last report before the data freeze), the cumulative figures for each state were read as well.
+2. Each year's final state figures were compared with the sums of the weekly figures already extracted, state by state, to identify the states in which the differences arise. Deaths reported only as a national total in the weekly reports have no state, so they are counted separately rather than through their allocation (data-handling rule 8).
+3. The national cumulative figures printed in each report were compared with the running sums of the weekly figures, to find the weeks in which the differences were added.
+
+A9 is descriptive: differences are reported as counts, by year, state and week, with no interval and no test. Years in which archive gaps or the report format prevent a like-for-like comparison (2017, which counts from the onset of the season in December 2016; 2018, which has no state table; and weeks lost to missing reports) are reported with the reason. The summary goes in the main text and the full tables in the supplement.
+
+A9 does not change any other analysis. A1-A8 use the weekly figures, as specified; their interpretation states that the weekly figures exclude any deaths added only to the cumulative figures, and how many deaths that is in each year. The tipping point (A3) uses the published cumulative figures, as specified, and so includes them.
+
+Data and code: the cumulative figures are in `data-raw/lassa_cumulative_national.csv` and `data-raw/lassa_cumulative_state.csv`, and A9 runs in `R/addendum1_cumulative_gap.R`.
 
 ## References
 
