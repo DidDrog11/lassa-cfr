@@ -28,7 +28,7 @@ Version 1.0, fixed 4 October 2026. This version is the initial commit of the pub
 
 This is an analysis plan fixed before the analyses were run on the final dataset. It is not a preregistration. Any change made after this version is reported as a deviation, with its reason, in the paper and in a dated addendum to this document.
 
-Addenda, at the end of this document: Addendum 1 (5 October 2026) adds one descriptive analysis, A9; Addendum 2 (5 October 2026) adds a check of rebuilt and missing weeks against a second NCDC publication.
+Addenda, at the end of this document: Addendum 1 (5 October 2026) adds one descriptive analysis, A9; Addendum 2 (5 October 2026) adds a check of rebuilt and missing weeks against a second NCDC publication; Addendum 3 (5 October 2026) repeats the annual and phase-matched comparisons on the published cumulative series.
 
 ## Prior knowledge
 
@@ -270,6 +270,21 @@ This addendum adds one check. It changes no analysis, and no analysis uses its v
 **The check.** National confirmed cases and deaths from that dataset are compared with our data for the weeks rebuilt from the difference between two cumulative reports (data-handling rule 4: 2022 week 14, 2022 weeks 19-23 as one total, 2023 week 38 and 2024 week 16), and are listed for the weeks with no situation report. The situation reports remain the only data source for the analyses, and weeks with no situation report stay missing (data-handling rule 3). The comparison is reported as counts in the supplement.
 
 Code: `R/addendum2_wer_check.R`, which reads the dataset at a fixed revision.
+
+## Addendum 3, 5 October 2026
+
+This addendum adds one descriptive comparison. It changes no analysis.
+
+**Why it was added.** A9 showed that the cumulative death counts printed in the reports differ from the sums of the weekly counts by amounts that vary between years, so the published and weekly series can give different trends in CFR. The pre-specified analyses use the weekly series. This comparison was added after their results had been seen, so that readers can see both series side by side.
+
+**The comparison.** Using the national cumulative figures printed in every report (the data of A9):
+
+1. The annual CFR from each year's final printed cumulative figures (for 2026, the last report before the data freeze), alongside the annual CFR from the weekly figures.
+2. The phase-matched comparison of A1 repeated on the printed running totals: within weeks 1 to the last week reported in 2026, the phase point of each year is the first week with a printed figure at which printed cumulative confirmed cases reach 25% and 50% of the year's printed total at the end of that window, and the printed cumulative CFR is compared between 2026 and 2025 at those points and at the fixed week 23.
+
+The printed figures are national totals only, so there are no state-weeks to resample: the comparison gives point estimates without intervals, and is reported as descriptive. 2017 is shown with its caveat (its printed totals count from December 2016).
+
+Code: `R/addendum3_published_series.R`.
 
 ## References
 
