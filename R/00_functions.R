@@ -1,4 +1,4 @@
-# 00_functions.R -- shared settings and helpers, sourced by every other script.
+# 00_functions.R -- shared settings and helpers.
 
 # Seasons used for inference (decomposition, model, phase matching). 2017 is
 # loaded and shown in descriptive series as context only (see the analysis
@@ -6,8 +6,7 @@
 # season.
 inference_years <- 2018:2026
 
-# Where outputs go. Each script saves only what a later script, the figures or
-# the manuscript reads, or what takes long to compute.
+# Where outputs go. 
 #   data/intermediate  analysis-ready data built from the ledger by 01, read by 02-11
 #   data/qc            validation output from 02, for checking the extract
 #   data/results       one file per result, read by the figures and the manuscript
@@ -25,8 +24,7 @@ save_table <- function(x, name) {
   readr::write_csv(x, here::here("tables", paste0(name, ".csv")))
 }
 
-# Adds up a set of counts, but returns NA rather than 0 when every value is NA,
-# so "unknown" never turns into "zero" when counts are combined.
+# Adds up a set of counts, but returns NA rather than 0 when every value is NA
 sum_or_na <- function(x) if (all(is.na(x))) NA_real_ else sum(x, na.rm = TRUE)
 
 nigeria_states <- c(

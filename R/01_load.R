@@ -71,10 +71,6 @@ national_deaths_only <- tribble(
 
 dir.create(here("data"), showWarnings = FALSE)
 
-# sum_or_na() (in 00_functions.R) is used wherever counts are combined, so a set
-# of values that are all unknown adds up to NA, not 0.
-
-
 # Read the ledger and tidy the state names --------------------------------------
 
 raw <- read_csv(ledger_path,

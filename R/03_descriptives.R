@@ -24,7 +24,6 @@ blocks <- read_output("intermediate", "state_blocks")
 
 core_vars <- c("suspected", "confirmed", "probable", "deaths")
 
-
 # National weekly counts ---------------------------------------------------------
 
 # Sum states within each week. `n_states_na` counts states whose value is
@@ -85,7 +84,7 @@ coverage <- national_week |>
             weeks_deaths_partial = sum(deaths_partial),
             .by = year)
 
-# Diagnostic only. Deaths given only nationally are allocated to states in
+# Deaths given only nationally are allocated to states in
 # 01_load.R (see the analysis plan), so in the inference years `cfr` and
 # `cfr_matched` agree. They can differ in 2017, where a few weeks give deaths
 # with no breakdown and no allocation is made.

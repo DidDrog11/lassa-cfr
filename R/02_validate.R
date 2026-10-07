@@ -1,11 +1,9 @@
 # 02_validate.R
 #
-# Checks on the loaded data before anything is analysed. Prints what it finds
-# and writes a flag table; it changes nothing. Each flag names its sitrep so the
-# PDF can be pulled and checked.
+# Checks on the loaded data before anything is analysed. 
 #
-# The extraction has its own checks against the sitrep totals (run in
-# map-liberator/analysis/). This script covers what those cannot see: how the
+# The extraction has its own checks against the sitrep totals.
+# This script covers what those cannot see: how the
 # blanks were filled, which weeks are missing, values that contradict each
 # other, and how many states have enough cases to analyse on their own.
 
@@ -29,13 +27,14 @@ roster_min <- 30
 # 1. Values built from more than one row -------------------------------------------
 
 # Each sitrep should give one value per state per variable. Where 01_load.R had
-# to add rows together (the Jos -> Plateau recode), list them.
+# to add rows together, list them: a late report ("not previously reported")
+# folded into the week of the sitrep that carried it, or a Jos row recoded to
+# Plateau. Anything else here would be a value entered twice.
 dupes <- ledger |>
   filter(n_rows > 1)
 
 message("1. Sitrep-state-variable values built from more than one row: ", nrow(dupes))
 print(dupes |> select(year, epi_week, state, variable, n_rows, source_file))
-
 
 # 2. Weeks with more than one sitrep -------------------------------------------------
 
@@ -83,7 +82,6 @@ print(status_table, n = 60)
 message("   Sitreps needing a look (mixed, or variable not entered): ", nrow(needs_a_look))
 print(needs_a_look |> select(year, epi_week, variable, status, n_entered, n_na, source_file), n = 50)
 
-
 # 4. Missing weeks -----------------------------------------------------------------
 
 # Weeks with no sitrep. Compare with the archive manifest: a week missing from
@@ -97,7 +95,6 @@ missing_weeks <- state_week |>
 
 message("4. Weeks with no sitrep (in_block = TRUE: covered by a multi-week block):")
 print(missing_weeks)
-
 
 # 5. Which variables are known, by year -----------------------------------------------
 
