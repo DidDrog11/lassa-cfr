@@ -20,7 +20,7 @@ The plan fixes eight analyses in three roles:
 | Secondary: reported in full, no conclusion rests on them alone | A4 hierarchical model, A5 isolated detection |
 | Descriptive | A6 suspected-case positivity, A7 use of the probable category, A8 year-end check |
 
-Three addenda, dated 5 October 2026, were added after the plan was fixed and are released as `v1.1`. None changes analyses A1-A8. Addendum 1 adds a descriptive analysis, A9: the cumulative figures printed in each report against the sums of the weekly figures. Addendum 2 adds a check of rebuilt and missing weeks against national counts from NCDC's Weekly Epidemiological Report. Addendum 3 repeats the annual and phase-matched comparisons on the printed cumulative figures, as point estimates. Each addendum gives its reason at the end of the plan.
+Three addenda, dated 5 October 2026, were added after the plan was fixed and are released as `v1.1`, archived at Zenodo: https://doi.org/10.5281/zenodo.23214077. None changes analyses A1-A8. Addendum 1 adds a descriptive analysis, A9: the cumulative figures printed in each report against the sums of the weekly figures. Addendum 2 adds a check of rebuilt and missing weeks against national counts from NCDC's Weekly Epidemiological Report. Addendum 3 repeats the annual and phase-matched comparisons on the printed cumulative figures, as point estimates. Each addendum gives its reason at the end of the plan.
 
 ## Contents
 
