@@ -224,7 +224,7 @@ fig3a <- ggplot(tipping_plot, aes(x, label, colour = role)) +
   labs(x = "Missed survivors needed at week 23", y = NULL) +
   theme_paper
 
-# (b) Suspected-case positivity (a proxy, not test positivity) by season:
+# (b) Proportion of suspected cases confirmed (a proxy, not test positivity) by season:
 # nationally, and for each roster state from 2020.
 state_lines <- positivity_state |>
   filter(state %in% roster_states, year >= 2020, !is.na(positivity))
@@ -252,7 +252,7 @@ fig3b <- ggplot() +
   scale_y_continuous(labels = scales::percent) +
   scale_x_continuous(breaks = inference_years, labels = short_year, expand = expansion(mult = c(0.02, 0.25))) +
   coord_cartesian(clip = "off") +
-  labs(x = NULL, y = "Suspected-case positivity (proxy)") +
+  labs(x = NULL, y = "Proportion of suspected cases confirmed (proxy)") +
   theme_paper
 
 figure3 <- fig3a + fig3b + plot_layout(widths = c(1.1, 1)) + plot_annotation(tag_levels = "a")

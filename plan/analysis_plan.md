@@ -28,7 +28,7 @@ Version 1.0, fixed 4 October 2026. This version is the initial commit of the pub
 
 This is an analysis plan fixed before the analyses were run on the final dataset. It is not a preregistration. Any change made after this version is reported as a deviation, with its reason, in the paper and in a dated addendum to this document.
 
-Addenda, at the end of this document: Addendum 1 (5 October 2026) adds one descriptive analysis, A9; Addendum 2 (5 October 2026) adds a check of rebuilt and missing weeks against a second NCDC publication; Addendum 3 (5 October 2026) repeats the annual and phase-matched comparisons on the published cumulative series.
+Addenda, at the end of this document: Addendum 1 (5 October 2026) adds one descriptive analysis, A9; Addendum 2 (5 October 2026) adds a check of rebuilt and missing weeks against a second NCDC publication; Addendum 3 (5 October 2026) repeats the annual and phase-matched comparisons on the published cumulative series; Addendum 4 (9 October 2026) records corrections to 30 values in the 2021-2023 extract, applied before the final run.
 
 ## Prior knowledge
 
@@ -285,6 +285,16 @@ This addendum adds one descriptive comparison. It changes no analysis.
 The printed figures are national totals only, so there are no state-weeks to resample: the comparison gives point estimates without intervals, and is reported as descriptive. 2017 is shown with its caveat (its printed totals count from December 2016).
 
 Code: `R/addendum3_published_series.R`.
+
+## Addendum 4, 9 October 2026
+
+This addendum records a correction to the data. It changes no analysis, estimand, role or data-handling rule.
+
+**Why it was made.** The scripted checks of the completed extraction against the totals printed in each report (see *Source and extraction*) were finished for 2021-2023 after the extract used for the first full run had been exported on 1 October 2026. They identified 30 values in those years that had been entered incorrectly and were not yet corrected in that extract. A further error, 2021 week 7 Taraba suspected cases, was already corrected in `01_load.R`. The other years' corrections had been applied before the export.
+
+**What was done.** The extract was re-exported from the extraction ledger with the 30 corrections applied, replacing `data-raw/lassa_state_week_ledger.csv`, and every analysis was rerun on it before submission, with the same code. Seven of the corrections change confirmed cases or deaths: 2021 week 2 Taraba (2 confirmed, 1 death added), 2022 week 11 Plateau (1 confirmed), 2022 week 16 Kogi (2 confirmed), 2023 week 2 Imo (1 death), 2023 week 5 Kogi (3 confirmed) and Enugu (1 confirmed), and 2023 week 15 Edo (2 confirmed removed). The rest change suspected or probable cases, or record as zero a state that the report lists with no cases, which the data-handling rules already treated as zero. No state crosses the threshold of 30 confirmed cases, so the strata of the decomposition are unchanged.
+
+**Effect.** Results for the 2025-2026 comparison do not use these years and are unchanged. Results that include 2021-2023 change slightly: for example, the within-state component of the 2020-2021 change moves from +5.5 to +5.7 percentage points, the deaths added outside the weekly figures in 2021 and 2023 fall by one each, and the posterior probability that the year standard deviation exceeds the state-within-year standard deviation moves from 0.148 to 0.141. The paper reports results from the corrected extract.
 
 ## References
 

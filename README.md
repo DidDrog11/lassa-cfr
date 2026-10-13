@@ -20,18 +20,19 @@ The plan fixes eight analyses in three roles:
 | Secondary: reported in full, no conclusion rests on them alone | A4 hierarchical model, A5 isolated detection |
 | Descriptive | A6 suspected-case positivity, A7 use of the probable category, A8 year-end check |
 
-Three addenda, dated 5 October 2026, were added after the plan was fixed and are released as `v1.1`, archived at Zenodo: https://doi.org/10.5281/zenodo.23214077. None changes analyses A1-A8. Addendum 1 adds a descriptive analysis, A9: the cumulative figures printed in each report against the sums of the weekly figures. Addendum 2 adds a check of rebuilt and missing weeks against national counts from NCDC's Weekly Epidemiological Report. Addendum 3 repeats the annual and phase-matched comparisons on the printed cumulative figures, as point estimates. Each addendum gives its reason at the end of the plan.
+Three addenda, dated 5 October 2026, were added after the plan was fixed and are released as `v1.1`, archived at Zenodo: https://doi.org/10.5281/zenodo.23214077. None changes analyses A1-A8. Addendum 1 adds a descriptive analysis, A9: the cumulative figures printed in each report against the sums of the weekly figures. Addendum 2 adds a check of rebuilt and missing weeks against national counts from NCDC's Weekly Epidemiological Report. Addendum 3 repeats the annual and phase-matched comparisons on the printed cumulative figures, as point estimates. Each addendum gives its reason at the end of the plan. Addendum 4 (9 October 2026) records corrections to 30 values in the 2021-2023 extract, found by the checks of the extraction against the printed totals after the first full run; every analysis was rerun on the corrected extract before submission. It is released with the extracted data as `v1.2`.
 
 ## Contents
 
 - `plan/analysis_plan.md`: the pre-specified analysis plan.
 - `R/`: the analysis. `00_functions.R` holds shared helpers, and `addendum1_` to `addendum3_` carry out the addenda.
+- `data-raw/`: the extracted data (see Data).
 - `sim/`: design simulations that informed choices in the plan. They use the structure of the data with simulated deaths.
 - `renv.lock`: package versions.
 
 ## Data
 
-The data are counts of suspected, confirmed and probable cases and of deaths among confirmed cases, by state and epidemiological week, read by hand from NCDC Lassa fever situation reports (https://ncdc.gov.ng). The reports are public. The extracted dataset will be released with the paper.
+The data are counts of suspected, confirmed and probable cases and of deaths among confirmed cases, by state and epidemiological week, read by hand from NCDC Lassa fever situation reports (https://ncdc.gov.ng). The reports are public. The extracted data are in `data-raw/`: `lassa_state_week_ledger.csv`, the extraction ledger; `lassa_cumulative_national.csv` and `lassa_cumulative_state.csv`, the cumulative figures printed in the reports; and `extraction_checks_by_year.csv`, the scripted checks of the extraction against the totals printed in each report, by year (values extracted, entry errors found and corrected, and weeks in which a report contradicts itself; 2017 was not checked).
 
 ## Running the analysis
 
@@ -57,7 +58,7 @@ Outputs are written to:
 
 ## Licence
 
-CC0 1.0 Universal: the code, the analysis plan and, when released, the extracted dataset are dedicated to the public domain. See `LICENSE`.
+CC0 1.0 Universal: the code, the analysis plan and the extracted dataset are dedicated to the public domain. See `LICENSE`.
 
 ## Use of AI tools
 
