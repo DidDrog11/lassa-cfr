@@ -118,17 +118,18 @@ fig1a <- ggplot(mapping = aes(epi_week, cfr, group = interaction(year, series)))
 # (b) Annual CFR, 2017-2026, in both series. Weekly: from weeks where both deaths
 # and confirmed cases are known (cfr_matched; see 03_descriptives.R), hollow where
 # the year has missing weeks or is incomplete. Published: each year's final printed
-# cumulative figure (2017 counts from December 2016).
+# cumulative figure, which for the last year is the latest report (2017 counts
+# from December 2016).
 annual_points <- bind_rows(
   national_season |>
     transmute(year, cfr = cfr_matched, marker = if_else(partial_year, "Summed weekly, incomplete year", "Summed weekly")),
   published_annual |>
-    transmute(year, cfr = cfr_published, marker = "Published year-end")) |>
+    transmute(year, cfr = cfr_published, marker = "Published, last report of the year")) |>
   mutate(season = season_colour(year))
 
 fig1b <- ggplot(annual_points, aes(factor(year), cfr, colour = season, shape = marker)) +
   geom_point(size = 2.4, stroke = 0.9, fill = "white") +
-  scale_shape_manual(values = c("Summed weekly" = 16, "Summed weekly, incomplete year" = 21, "Published year-end" = 4),
+  scale_shape_manual(values = c("Summed weekly" = 16, "Summed weekly, incomplete year" = 21, "Published, last report of the year" = 4),
                      name = NULL) +
   scale_colour_manual(values = season_palette, guide = "none") +
   scale_x_discrete(labels = short_year) +
