@@ -4,6 +4,8 @@
 
 Pre-specified analysis plan and analysis code for a study of what published surveillance data can and cannot show about a change in reported Lassa fever case fatality in Nigeria.
 
+The paper is available as a preprint on medRxiv, not yet peer reviewed: https://doi.org/10.64898/2026.10.14.26365510.
+
 ## The question
 
 The Nigeria Centre for Disease Control and Prevention (NCDC) reports a case fatality rate (CFR) among laboratory-confirmed Lassa fever cases in every weekly situation report. In 2026 the cumulative CFR at week 23 was 25.0%, against 18.9% in the same period of 2025. A reported CFR is a ratio of two counts produced by surveillance, so it can change for reasons other than a change in the risk of death: who is tested, which deaths are found, where cases occur and when the figure is read. This study sets out those mechanisms, assesses which of them the published reports allow us to evaluate, and evaluates those that can be.
