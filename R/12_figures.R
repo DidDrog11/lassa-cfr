@@ -75,16 +75,16 @@ context_labels <- c(2018, 2020)   # the highest and lowest context years, labell
 # reference and target years in colour, weekly (solid) and published (dotted).
 cumulative <- national_week |>
   filter(cum_known, cum_confirmed >= min_cases) |>
-  transmute(year, epi_week, cfr = cfr_cumulative, season = season_colour(year), series = "Summed weekly reports")
+  transmute(year, epi_week, cfr = cfr_cumulative, season = season_colour(year), series = "Weekly series")
 
 published_lines <- published_running |>
   filter(year %in% c(reference_year, target_year), cum_confirmed >= min_cases) |>
-  transmute(year, epi_week, cfr = cfr_published, season = season_colour(year), series = "Published cumulative")
+  transmute(year, epi_week, cfr = cfr_published, season = season_colour(year), series = "Cumulative series")
 
 highlight <- bind_rows(filter(cumulative, season != "other"), published_lines)
 
 end_labels <- highlight |>
-  filter(series == "Summed weekly reports") |>
+  filter(series == "Weekly series") |>
   slice_max(epi_week, by = year)
 
 context_ends <- cumulative |>
@@ -105,7 +105,7 @@ fig1a <- ggplot(mapping = aes(epi_week, cfr, group = interaction(year, series)))
   geom_text(data = context_ends, aes(label = year), colour = "grey45", hjust = -0.2, size = 2.6) +
   annotate("text", x = 23, y = Inf, label = "week 23", vjust = 1.5, hjust = -0.1, size = 2.8, colour = "grey40") +
   scale_colour_manual(values = season_palette, guide = "none") +
-  scale_linetype_manual(values = c("Summed weekly reports" = "solid", "Published cumulative" = "11"), name = NULL,
+  scale_linetype_manual(values = c("Weekly series" = "solid", "Cumulative series" = "11"), name = NULL,
                         guide = guide_legend(keywidth = unit(1.2, "cm"))) +
   scale_shape_manual(values = c("25%" = 21, "50%" = 24), name = "Phase point") +
   scale_x_continuous(expand = expansion(mult = c(0.02, 0.12))) +
@@ -122,14 +122,14 @@ fig1a <- ggplot(mapping = aes(epi_week, cfr, group = interaction(year, series)))
 # from December 2016).
 annual_points <- bind_rows(
   national_season |>
-    transmute(year, cfr = cfr_matched, marker = if_else(partial_year, "Summed weekly, incomplete year", "Summed weekly")),
+    transmute(year, cfr = cfr_matched, marker = if_else(partial_year, "Weekly series, incomplete year", "Weekly series")),
   published_annual |>
-    transmute(year, cfr = cfr_published, marker = "Published, last report of the year")) |>
+    transmute(year, cfr = cfr_published, marker = "Cumulative series, last report of the year")) |>
   mutate(season = season_colour(year))
 
 fig1b <- ggplot(annual_points, aes(factor(year), cfr, colour = season, shape = marker)) +
   geom_point(size = 2.4, stroke = 0.9, fill = "white") +
-  scale_shape_manual(values = c("Summed weekly" = 16, "Summed weekly, incomplete year" = 21, "Published, last report of the year" = 4),
+  scale_shape_manual(values = c("Weekly series" = 16, "Weekly series, incomplete year" = 21, "Cumulative series, last report of the year" = 4),
                      name = NULL) +
   scale_colour_manual(values = season_palette, guide = "none") +
   scale_x_discrete(labels = short_year) +
@@ -211,9 +211,9 @@ roster_states <- unique(read_output("results", "decomposition_rosters")$state)
 # is the share of suspected cases not confirmed, so each point is labelled with both.
 # Short labels here; the full description of each comparison is in the caption.
 tipping_plot <- tipping |>
-  mutate(label = case_when(role == "primary" ~ paste0("Published, ", target_year, " vs ", reference_year),
-                           grepl("pooled", comparison) ~ paste0("Reconstructed, ", target_year, " vs pooled"),
-                           .default = paste0("Reconstructed, ", target_year, " vs ", reference_year)),
+  mutate(label = case_when(role == "primary" ~ paste0("Cumulative, ", target_year, " vs ", reference_year),
+                           grepl("pooled", comparison) ~ paste0("Weekly, ", target_year, " vs pooled"),
+                           .default = paste0("Weekly, ", target_year, " vs ", reference_year)),
          label = reorder(label, role == "primary"),
          value_label = paste0(round(x), " (", scales::percent(share_of_not_confirmed, accuracy = 0.1), ")"))
 

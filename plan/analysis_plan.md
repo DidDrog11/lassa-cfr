@@ -28,7 +28,7 @@ Version 1.0, fixed 4 October 2026. This version is the initial commit of the pub
 
 This is an analysis plan fixed before the analyses were run on the final dataset. It is not a preregistration. Any change made after this version is reported as a deviation, with its reason, in the paper and in a dated addendum to this document.
 
-Addenda, at the end of this document: Addendum 1 (5 October 2026) adds one descriptive analysis, A9; Addendum 2 (5 October 2026) adds a check of rebuilt and missing weeks against a second NCDC publication; Addendum 3 (5 October 2026) repeats the annual and phase-matched comparisons on the published cumulative series; Addendum 4 (9 October 2026) records corrections to 30 values in the 2021-2023 extract, applied before the final run.
+Addenda, at the end of this document: Addendum 1 (5 October 2026) adds one descriptive analysis, A9; Addendum 2 (5 October 2026) adds a check of rebuilt and missing weeks against a second NCDC publication; Addendum 3 (5 October 2026) repeats the annual and phase-matched comparisons on the published cumulative series; Addendum 4 (9 October 2026) records corrections to 30 values in the 2021-2023 extract, applied before the final run; Addendum 5 (10 November 2026) adds two descriptive analyses during revision of the paper, A10 and A11.
 
 ## Prior knowledge
 
@@ -295,6 +295,36 @@ This addendum records a correction to the data. It changes no analysis, estimand
 **What was done.** The extract was re-exported from the extraction ledger with the 30 corrections applied, replacing `data-raw/lassa_state_week_ledger.csv`, and every analysis was rerun on it before submission, with the same code. Seven of the corrections change confirmed cases or deaths: 2021 week 2 Taraba (2 confirmed, 1 death added), 2022 week 11 Plateau (1 confirmed), 2022 week 16 Kogi (2 confirmed), 2023 week 2 Imo (1 death), 2023 week 5 Kogi (3 confirmed) and Enugu (1 confirmed), and 2023 week 15 Edo (2 confirmed removed). The rest change suspected or probable cases, or record as zero a state that the report lists with no cases, which the data-handling rules already treated as zero. No state crosses the threshold of 30 confirmed cases, so the strata of the decomposition are unchanged.
 
 **Effect.** Results for the 2025-2026 comparison do not use these years and are unchanged. Results that include 2021-2023 change slightly: for example, the within-state component of the 2020-2021 change moves from +5.5 to +5.7 percentage points, the deaths added outside the weekly figures in 2021 and 2023 fall by one each, and the posterior probability that the year standard deviation exceeds the state-within-year standard deviation moves from 0.148 to 0.141. The paper reports results from the corrected extract.
+
+## Addendum 5, 10 November 2026
+
+This addendum adds two descriptive analyses, A10 and A11. Nothing above is changed.
+
+**Why they were added.** They were added during revision of the paper, after every other result had been seen, at the author's decision. Each tests or supports a specific claim the paper makes; neither is a search for new findings. A10 asks whether two claims about the 2026 rise hold on the published series, which is the series that shows the rise: that it does not come from cases shifting between states, and that it rests on the deaths added in one state. A11 shows what a person planning a trial would take from the reports as a baseline CFR, and how much that choice matters, which is the use of the reports the paper discusses.
+
+**A10. The published 2025-2026 difference by state, at week 36 (M6, M10, M11).**
+
+*In plain terms.* The split into within-state and between-state parts (A2) used the weekly figures, which do not show the 2026 rise. A10 repeats the split on the published figures, at week 36, the only week for which published 2026 figures by state were extracted. It also recalculates the national difference leaving out each of the states with most cases in turn, to see whether the difference depends on one of them.
+
+1. Published cumulative confirmed cases and deaths by state at week 36 of 2026 come from the state table of the 2026 week 36 report (the data of A9). The same figures for 2025 were read by hand from the state table of the 2025 week 36 report for this addendum (`data-raw/lassa_cumulative_state_2025_w36.csv`). The state rows of each report are checked against the national figures printed in the same report.
+2. The 2025-2026 difference in national published CFR at week 36 is split into within-state and between-state parts as in A2, with A2's strata for this pair of years (states with at least 30 confirmed cases in both full seasons stand alone; the rest are pooled). The same split on the weekly figures summed to week 36 is shown alongside.
+3. The national published difference is recalculated with each stand-alone state left out in turn. The same recalculation on the weekly figures was added on 10 November 2026, after the first run of this addendum, to show whether the difference that remains without a state is also in the weekly figures.
+4. For each state and year, the published figures at week 36 are set against the weekly figures summed to week 36, showing where deaths and cases were added outside the weekly figures.
+
+Week 36 is a fixed calendar week, not a phase-matched point, because published 2026 state figures were extracted for no other week. The published figures have no state-weeks to resample, so A10 gives point estimates without intervals.
+
+**A11. Baseline CFR from the reports for trial planning (M6, M8, M10, M11).**
+
+*In plain terms.* Someone planning a trial with death as an endpoint, or choosing where to run one, might take a CFR or a case count from the reports. A11 shows how much the answer depends on which series, year and state they choose, and how much that difference matters for the size of a trial. It also shows how stable the ranking of states by confirmed cases is from year to year, since sites are usually chosen where most cases are reported.
+
+1. Annual CFR, 2018-2025 and 2026 to the last reported week: nationally on the weekly and the published series; by state on the weekly series for each state with at least 30 confirmed cases in that year, with the published year-end figure alongside from 2020.
+2. The lowest and highest of these CFRs across years nationally, across states within each year, and across years within each state with at least two qualifying years.
+3. For each range, the ratio of the number of patients a two-arm trial would need at the lowest baseline to the number at the highest, for a given relative reduction in the risk of death. With the normal approximation the number per arm is proportional to [p(1 - p) + q(1 - q)] / (p - q)^2, where p is the baseline CFR and q = (1 - r)p for relative reduction r; power and significance level cancel in the ratio. The ratio is given for r = 25% and r = 50%.
+4. Each state's share of the year's confirmed cases and its rank, the three states with most confirmed cases each year, and whether that set changes from the year before.
+
+A11 is descriptive and gives point estimates. It does not estimate the size of any trial. The reports give no location finer than the state, while trials recruit in local government areas and villages, where incidence and CFR may differ widely within a state; A11 describes the state scale only, and says nothing about whether the places within a state that report cases are the same from year to year.
+
+Data and code: `data-raw/lassa_cumulative_state_2025_w36.csv` (new) and the data of A9; A10 and A11 run in `R/addendum5_trial_parameters.R`, after the A9 and Addendum 3 scripts.
 
 ## References
 
